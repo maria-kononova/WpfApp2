@@ -1,0 +1,71 @@
+﻿<Window x:Class="WpfApp2.program"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="program" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <DockPanel>
+                <Button x:Name="updateDataGrid" Content="Обновить список" Background="White" Width="150" Margin="10" FontSize="16" Click="updateDataGrid_Click"/>
+            </DockPanel>
+            <DataGrid Name="appealDataGrid" MouseDoubleClick="appealDataGrid_MouseDoubleClick">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Статус}" Value="Принято">
+                                <Setter Property="Background" Value="LightGreen" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Статус}" Value="В работе">
+                                <Setter Property="Background" Value="LightCyan" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Статус}" Value="Завершено">
+                                <Setter Property="Background" Value="Azure" />
+                            </DataTrigger>
+                            <!-- Добавьте другие DataTrigger для других условий -->
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+            <TextBlock x:Name="msg"/>
+        </StackPanel>
+        <StackPanel Grid.RowSpan="2" Background="AliceBlue">
+            <TextBlock Text="Создание заявки" FontSize="16" HorizontalAlignment="Center"/>
+            <Separator/>
+            <TextBlock Text="Оборудование" FontSize="16"/>
+            <DockPanel>
+                <TextBlock Text="Серийный номер" FontSize="14" Margin="5"/>
+                <TextBox Name="serialNumberTextBox" FontSize="14" Margin="5"/>
+            </DockPanel>
+            <ComboBox Name="typeEquipmentComboBox" Text="Тип оборудования" IsEditable="True" IsReadOnly="True" FontSize="14" Margin="5"/>
+            <Separator/>
+            <TextBlock Text="Проблема" FontSize="16"/>
+            <ComboBox Name="typeProblemComboBox" Text="Неисправность" IsEditable="True" IsReadOnly="True" FontSize="14" Margin="5"/>
+            <DockPanel>
+                <TextBlock Text="Описание" FontSize="14" Margin="5"/>
+                <TextBox Name="problemTextBox" FontSize="14" Margin="5"/>
+            </DockPanel>
+            <Separator/>
+            <TextBlock Text="Клиент" FontSize="16"/>
+            <DockPanel>
+                <TextBlock Text="Имя" FontSize="14" Margin="5"/>
+                <TextBox Name="nameClientTextBox" FontSize="14" Margin="5"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Телефон" FontSize="14" Margin="5"/>
+                <TextBox Name="phoneClientTextBox" FontSize="14" Margin="5"/>
+            </DockPanel>
+            <Button x:Name="addButton" Content="Создать заявку" Click="addButton_Click" Background="White" FontSize="14" Margin="5" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,49 @@
+﻿<Window x:Class="WpfApp2.stage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="stage" Height="450" Width="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Данные о клиенте"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" >
+            <TextBlock Text="Данные об оборудовании"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <TextBlock Text="Данные о заявке"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Separator/>
+            <TextBlock Text="Создание этапа"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Separator/>
+            <DataGrid x:Name="stageDataGrid" MouseDoubleClick="stageDataGrid_MouseDoubleClick">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Статус}" Value="Завершено">
+                                <Setter Property="Background" Value="AliceBlue"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+            </DataGrid>
+            <TextBlock Text="Материалы:"/>
+            <TextBlock x:Name="cost"/>
+        </StackPanel>
+    </Grid>
+</Window>
