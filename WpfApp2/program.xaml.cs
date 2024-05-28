@@ -21,6 +21,7 @@ namespace WpfApp2
     public partial class program : Window
     {
         private User user;
+        private int selectedId;
 
         public program(User user)
         {
@@ -47,6 +48,10 @@ namespace WpfApp2
             var db = Helper.GetContext();
             var typeEquipment = db.Typequipments.Select( e => e.Name);
             typeEquipmentComboBox.ItemsSource = typeEquipment.ToList();
+            var statusApeal = db.Statuses.Select( e => e.Name);
+            statusApealComboBox.ItemsSource = statusApeal.ToList();
+            var master = db.Employeers.Select( e => e.Name + " " + e.Surname);
+            masterComboBox.ItemsSource = master.ToList();
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
@@ -95,19 +100,37 @@ namespace WpfApp2
                 // Получаем значение ячейки
                 string value = ((TextBlock)cell.Content).Text;
 
-                stage stage = new stage(Convert.ToInt32(value));
+                var db = Helper.GetContext();
+                Appeal appeal = db.Appeals.Where(s => s.Id == Convert.ToInt32(value)).FirstOrDefault();
+
+                descriptionProblemEdit.Text = appeal.Problem;
+                selectedId = Convert.ToInt32(value);
+                editTitleTextBlock.Text = "Редактирование заявки №" + selectedId;
+
+                /*stage stage = new stage(Convert.ToInt32(value));
                 stage.Show();
 
                 stage.Closed += (sender, e) =>
                 {
                     loadDataGrid();
-                };
+                };*/
 
             }
         }
 
+
         private void updateDataGrid_Click(object sender, RoutedEventArgs e)
         {
+            loadDataGrid();
+        }
+
+        private void editSave_Click(object sender, RoutedEventArgs e)
+        {
+            var db = Helper.GetContext();
+            Appeal appeal = db.Appeals.Where(s => s.Id == selectedId).FirstOrDefault();
+            appeal.Problem = descriptionProblemEdit.Text;
+            db.Update(appeal);
+            db.SaveChanges();
             loadDataGrid();
         }
     }

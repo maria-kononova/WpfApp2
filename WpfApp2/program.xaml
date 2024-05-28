@@ -37,6 +37,14 @@
                     </Style>
                 </DataGrid.RowStyle>
             </DataGrid>
+            <StackPanel x:Name="EditApeal">
+                <TextBlock Name="editTitleTextBlock" FontSize="20" TextAlignment="Center" Margin="10"/>
+                <ComboBox Name="statusApealComboBox" Text="Статус заявки" IsEditable="True" IsReadOnly="True" FontSize="14" Margin="5"/>
+                <TextBlock Text="Описание проблемы:" FontSize="14" Margin="5"/>
+                <TextBox Name="descriptionProblemEdit"  FontSize="14" Margin="5" Height="50"/>
+                <ComboBox Name="masterComboBox" Text="Исполнитель" IsEditable="True" IsReadOnly="True" FontSize="14" Margin="5"/>
+                <Button Content="Сохранить изменения" Name="editSave" Click="editSave_Click"  Background="White" FontSize="14" Margin="5"/>
+            </StackPanel>
             <TextBlock x:Name="msg"/>
         </StackPanel>
         <StackPanel Grid.RowSpan="2" Background="AliceBlue">

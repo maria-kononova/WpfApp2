@@ -24,5 +24,10 @@ namespace WpfApp2
         public virtual Status? StatusNavigation { get; set; }
         //public virtual ICollection<Appealproblem> Appealproblems { get; set; }
         public virtual ICollection<Stage> Stages { get; set; }
+
+        public int returnPlusOne(int i)
+        {
+            return i + 1;
+        }
     }
 }
